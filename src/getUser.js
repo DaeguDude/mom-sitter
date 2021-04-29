@@ -7,7 +7,7 @@ const octokit = new Octokit({
 
 async function getUser(name) {
   const searchResponse = await octokit.request('GET /search/users', {
-    q: name,
+    q: `${name} in:login type:user`,
     per_page: 100,
     page: 1,
   });
