@@ -8,6 +8,8 @@ const octokit = new Octokit({
 async function getUser(name) {
   const searchResponse = await octokit.request('GET /search/users', {
     q: name,
+    per_page: 100,
+    page: 1,
   });
 
   console.log('Search Response: ', searchResponse);
