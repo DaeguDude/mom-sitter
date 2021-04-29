@@ -12,8 +12,18 @@ async function getUser(name) {
     page: 1,
   });
 
-  console.log('Search Response: ', searchResponse);
-  console.log('-----');
+  console.log(getNewUserList(searchResponse));
+}
+
+function getNewUserList(response) {
+  const userList = response.data.items;
+
+  const newUserList = userList.map((userInfo) => {
+    const { login, avatar_url } = userInfo;
+    return { login, avatar_url, is_favorite: false };
+  });
+
+  return newUserList;
 }
 
 export default getUser;
