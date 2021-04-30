@@ -1,0 +1,127 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
+h1 {
+  font-size: 2.3rem;
+  font-weight: 700;
+}
+
+.container {
+  width: 90%;
+  margin: 0 auto;
+}
+
+.row {
+  display: flex;
+}
+
+.row-between {
+  justify-content: space-between;
+}
+
+.userlist-section {
+}
+
+.userlist-section__header {
+  padding: 1.3em 0;
+}
+
+.userlist-section__nav {
+}
+
+.userlist-section__search-tab {
+}
+
+.tab {
+  padding-bottom: 0.4em;
+  width: 100%;
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.tab--active {
+  border-bottom: 5px solid #1980fa;
+}
+
+.userlist-section__search-bar {
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+
+  justify-content: space-between;
+  align-items: center;
+}
+
+.userlist-section__search-input {
+  border: none;
+  padding: 0.5em 0;
+  font-size: 1.5rem;
+  width: 75%;
+}
+
+.userlist-section__search-btn {
+  border: none;
+  background: none;
+}
+
+.userlist-section__search-icon {
+  background: green;
+}
+
+/************* 
+main
+**************/
+
+.users {
+}
+
+.users__row {
+}
+
+.users__row-title {
+  color: #0f0f0f;
+}
+
+.user {
+  border-bottom: 1px solid black;
+  padding: 0.3em 0;
+
+  justify-content: space-between;
+  align-items: center;
+}
+
+.user__img {
+  border-radius: 100px;
+  height: 60px;
+  width: 60px;
+}
+
+.user__name {
+  font-size: 1.25rem;
+  color: green;
+}
+
+.user__favorite {
+  background: none;
+  border: none;
+  outline: none;
+}
+
+.star-icon {
+  fill: #fff;
+  stroke-width: 1;
+  stroke: #000;
+}
+
+.star-icon--active {
+  fill: #1980fa;
+}
