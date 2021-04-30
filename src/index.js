@@ -1,21 +1,54 @@
 import getUser from './getUser';
+import './styles/style.css';
+import createUserList from './userList';
+import Favorite from './Favorite';
+import mySearchTab from './searchTab';
 
-function component() {
-  const form = document.createElement('form');
-  const input = document.createElement('input');
-  const findBtn = document.createElement('button');
-  form.appendChild(input);
-  form.appendChild(findBtn);
+console.log(mySearchTab);
+console.log(mySearchTab.getCurrentTab());
+mySearchTab.setTab('local');
 
-  findBtn.innerHTML = '유저찾기';
-  findBtn.addEventListener('click', (e) => {
-    e.preventDefault();
-    const currInputValue = input.value;
-    input.value = '';
-    getUser(currInputValue);
+// DEVELOP
+const header = document.querySelector('.userlist-section__header');
+const logCurrentStorageBtn = document.createElement('button');
+logCurrentStorageBtn.innerText = 'log users in favorite';
+logCurrentStorageBtn.addEventListener('click', logUsersInFavorite);
+
+const clearStorageBtn = document.createElement('button');
+clearStorageBtn.innerText = 'clear favorite storage';
+clearStorageBtn.addEventListener('click', clearLocalStorage);
+header.appendChild(logCurrentStorageBtn);
+header.appendChild(clearStorageBtn);
+
+// MAIN
+const searchBtn = document.querySelector('.userlist-section__search-btn');
+searchBtn.addEventListener('click', async () => {
+  resetUserListUI();
+
+  const usersToSearch = document.querySelector(
+    '.userlist-section__search-input'
+  ).value;
+  const userList = await getUser(usersToSearch);
+  const usersRow = document.querySelector('.users__row');
+  const userListUI = createUserList(userList);
+  userListUI.forEach((userUI) => {
+    usersRow.appendChild(userUI);
   });
+});
 
-  return form;
+function resetUserListUI() {
+  const usersRow = document.querySelector('.users__row');
+  while (usersRow.firstChild) {
+    usersRow.firstChild.remove();
+  }
 }
 
-document.body.appendChild(component());
+// logUsersInFavorite
+function logUsersInFavorite() {
+  console.log(Favorite.getUserData());
+}
+
+function clearLocalStorage() {
+  localStorage.clear();
+  logUsersInFavorite();
+}

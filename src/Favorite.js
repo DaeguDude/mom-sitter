@@ -19,8 +19,31 @@ function LocalStorage() {
   };
 
   const addUser = (userData) => {
-    const newUserData = [...getUserData(), userData];
+    let newUserData = [];
+
+    if (isStorageEmpty()) {
+      newUserData.push(userData);
+    } else {
+      newUserData = [...getUserData(), userData];
+    }
+
     storeUserData(newUserData);
+  };
+
+  const doesExist = (userName) => {
+    if (getUserData() === null) {
+      return false;
+    }
+
+    const result = getUserData().find(
+      (userInfo) => userInfo.login === userName
+    );
+
+    return result ? true : false;
+  };
+
+  const isStorageEmpty = () => {
+    return localStorage.getItem('users') === null ? true : false;
   };
 
   return {
@@ -28,6 +51,7 @@ function LocalStorage() {
     removeUser,
     addUser,
     getUserData,
+    doesExist,
   };
 }
 
