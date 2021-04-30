@@ -1,4 +1,8 @@
-function createSearchTab(tab) {
+import createFragment from './createFragment';
+
+function createSearchTab(tab, onTabChange) {
+  let UI;
+
   if (tab === 'api') {
     const tabAPI = `
       <div class="userlist-section__search-tab row">
@@ -7,8 +11,7 @@ function createSearchTab(tab) {
       </div>
     `;
 
-    const UI = createFragment(tabAPI);
-    return UI;
+    UI = createFragment(tabAPI);
   }
 
   if (tab === 'local') {
@@ -19,13 +22,13 @@ function createSearchTab(tab) {
       </div>
     `;
 
-    const UI = createFragment(localAPI);
-    return UI;
+    UI = createFragment(localAPI);
   }
-}
 
-function createFragment(elementHTML) {
-  return document.createRange().createContextualFragment(elementHTML);
+  const searchTab = UI.querySelector('.userlist-section__search-tab');
+  searchTab.addEventListener('click', onTabChange);
+
+  return UI;
 }
 
 export default createSearchTab;

@@ -1,15 +1,20 @@
+import { Root, initialState } from './state';
+// import state from './state';
 import clearPage from './clearPage';
 import addHeader from './addHeader';
 import addNav from './addNav';
-import addSearchTab from './addSearchTab';
-import addSearchBar from './addSearchBar';
 import addMain from './addMain';
 
-function render() {
+function render(state) {
+  const tab = state ? state.currentTab : initialState.currentTab;
+
+  const onSearchChangeHandler = Root.onSearchChangeHandler;
+  const onTabChange = Root.onTabChange;
+
   clearPage();
   addHeader();
-  addNav('api');
+  addNav(tab, onSearchChangeHandler, onTabChange);
   addMain();
 }
 
-export { render, addSearchTab, addSearchBar };
+export { render };

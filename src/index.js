@@ -8,6 +8,18 @@ import { render } from './render';
 
 render();
 
+// const app = document.querySelector('.userlist-section');
+// app.addEventListener('click', async (event) => {
+//   const classList = event.target.classList;
+//   if (classList.contains('userlist-section__search-icon')) {
+//     const usersToSearch = document.querySelector(
+//       '.userlist-section__search-input'
+//     ).value;
+//     const searchList = await getUser(usersToSearch);
+//     console.log(searchList);
+//   }
+// });
+
 // DEVELOP
 // const header = document.querySelector('.userlist-section__header');
 // const logCurrentStorageBtn = document.createElement('button');

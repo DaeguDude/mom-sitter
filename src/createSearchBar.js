@@ -1,11 +1,13 @@
-function addSearchBar() {
-  const UI = document.createRange().createContextualFragment(`
+import createFragment from './createFragment';
+
+function createSearchBar(tab, onSearchChangeHandler) {
+  const UI = createFragment(`
     <div class="userlist-section__search-bar">
       <div class="container row row-between">
         <input class="userlist-section__search-input" type=text"
         placeholder="검색어를 입력하세요">
         <button class="userlist-section__search-btn">
-          <svg
+          <svg class="userlist-section__search-icon"
             xmlns="http://www.w3.org/2000/svg"
             height="48px"
             viewBox="0 0 24 24"
@@ -22,7 +24,12 @@ function addSearchBar() {
     </div>
   `);
 
+  const searchInput = UI.querySelector('.userlist-section__search-input');
+  searchInput.addEventListener('change', (e) => {
+    onSearchChangeHandler(e);
+  });
+
   return UI;
 }
 
-export default addSearchBar;
+export default createSearchBar;

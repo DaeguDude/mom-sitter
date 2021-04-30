@@ -1,7 +1,9 @@
+import createFragment from './createFragment';
+
 function addHeader() {
   const userListSection = document.querySelector('.userlist-section');
 
-  const UI = document.createRange().createContextualFragment(`
+  const UI = createFragment(`
     <header class="userlist-section__header container">
       <h1 class="userlist-section__title">Github Stars</h1>
       <button>log users in favorite</button>
