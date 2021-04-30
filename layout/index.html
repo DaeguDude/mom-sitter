@@ -6,41 +6,72 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Layout</title>
     <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
-    <section class="searchable-userlist-table">
-      <header>
-        <h1 class="searchable-userlist-table">Github Stars</h1>
+    <section class="userlist-section">
+      <header class="userlist-section__header container">
+        <h1 class="userlist-section__title">Github Stars</h1>
       </header>
 
-      <nav>
-        <div class="search-tab">
-          <div class="tab">api</div>
+      <nav class="userlist-section__nav">
+        <div class="userlist-section__search-tab row">
+          <div class="tab tab--active">api</div>
           <div class="tab">로컬</div>
         </div>
-        <div class="search-bar">
-          <input class="search-input" type=text" placeholder="검색어를
-          입력하세요">
-          <img class="search-icon" />
+        <div class="userlist-section__search-bar">
+          <div class="container row row-between">
+            <input class="userlist-section__search-input" type=text"
+            placeholder="검색어를 입력하세요">
+            <button class="userlist-section__search-btn">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                height="48px"
+                viewBox="0 0 24 24"
+                width="48px"
+                fill="#000000"
+              >
+                <path d="M0 0h24v24H0V0z" fill="none" />
+                <path
+                  d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"
+                />
+              </svg>
+            </button>
+          </div>
         </div>
       </nav>
 
-      <main>
-        <div class="userlist-table">
-          <div class="userlist-row">
-            <h3 class="userlist-row-title"></h3>
-            <div class="user-row"></div>
-            <div class="user-row"></div>
-          </div>
-          <div class="userlist-row">
-            <h3 class="userlist-row-title"></h3>
-            <div class="user-row"></div>
-            <div class="user-row"></div>
-          </div>
-          <div class="userlist-row">
-            <h3 class="userlist-row-title"></h3>
-            <div class="user-row"></div>
-            <div class="user-row"></div>
+      <main class="users">
+        <div class="users__row">
+          <span class="users__row-title">a</span>
+          <div class="user row">
+            <img class="user__img" src="./headshot.jpg" />
+            <span class="user__name">Daegudude</span>
+            <button class="user__favorite">
+              <svg
+                class="star-icon"
+                xmlns="http://www.w3.org/2000/svg"
+                enable-background="new 0 0 24 24"
+                height="24px"
+                viewBox="0 0 24 24"
+                width="24px"
+                fill="#000000"
+              >
+                <g>
+                  <path d="M0,0h24v24H0V0z" fill="none" />
+                  <path d="M0,0h24v24H0V0z" fill="none" />
+                </g>
+                <g>
+                  <path
+                    d="M12,17.27L18.18,21l-1.64-7.03L22,9.24l-7.19-0.61L12,2L9.19,8.63L2,9.24l5.46,4.73L5.82,21L12,17.27z"
+                  />
+                </g>
+              </svg>
+            </button>
           </div>
         </div>
       </main>
