@@ -2,7 +2,8 @@ import clearPage from './clearPage';
 import addHeader from './addHeader';
 import addNav from './addNav';
 import addMain from './addMain';
-import getUser from './getUser';
+import Favorites from './Favorite';
+import { getSearchResponse, makeNewUserList } from './getUser';
 
 // const initialState = {
 //   searchInput: '',
@@ -15,7 +16,7 @@ function App() {
   let state = {
     searchInput: '',
     currentTab: 'api',
-    favorites: JSON.parse(localStorage.getItem('users')),
+    favorites: Favorites.getUserData(),
     userSearchResults: null,
   };
 
@@ -48,14 +49,21 @@ function App() {
     });
   }
 
+  function onFavoriteHandler(userInfo) {
+    console.log('onFavoriteHandler');
+    // 이놈 Favorite에 있어?
+
+    console.log(userInfo);
+  }
+
   async function onSearchHandler(e) {
     const userToSearch = state.searchInput;
-    const userList = await getUser(userToSearch);
+    const response = await getSearchResponse(userToSearch);
+    const newUserList = makeNewUserList(response, state.favorites);
     setState({
       ...state,
-      userSearchResults: userList,
+      userSearchResults: newUserList,
     });
-    // get a user list...
   }
 
   function render() {
@@ -70,7 +78,7 @@ function App() {
       onTabChange,
       onSearchHandler
     );
-    addMain(userSearchResults);
+    addMain(userSearchResults, onFavoriteHandler);
   }
 
   return { render };

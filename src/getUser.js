@@ -1,27 +1,26 @@
 import { Octokit } from '@octokit/core';
 import config from '../config';
-import Favorite from './Favorite';
 
 const octokit = new Octokit({
   auth: config.githubToken,
 });
 
-async function getUser(name) {
+async function getSearchResponse(name) {
   const searchResponse = await octokit.request('GET /search/users', {
     q: `${name} in:login type:user`,
     per_page: 100,
     page: 1,
   });
 
-  return makeNewUserList(searchResponse);
+  return searchResponse;
 }
 
-function makeNewUserList(response) {
+function makeNewUserList(response, favorites) {
   const userList = response.data.items;
 
   const newUserList = userList.map((userInfo) => {
     const { login, avatar_url } = userInfo;
-    const is_favorite = Favorite.doesExist(login);
+    const is_favorite = doesExistInFavorites(login, favorites);
 
     return { login, avatar_url, is_favorite };
   });
@@ -29,4 +28,14 @@ function makeNewUserList(response) {
   return newUserList;
 }
 
-export default getUser;
+function doesExistInFavorites(userName, favorites) {
+  if (favorites === null) {
+    return false;
+  }
+
+  const result = favorites.find((userInfo) => userInfo.login === userName);
+
+  return result ? true : false;
+}
+
+export { getSearchResponse, makeNewUserList };

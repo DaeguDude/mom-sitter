@@ -1,16 +1,8 @@
 // userInfo - object
 import Favorite from './Favorite';
 
-function createUserUI(userInfo) {
-  const { avatar_url, login } = userInfo;
-  let is_favorite = userInfo.is_favorite;
-  let userElem = null;
-
-  // 클릭 되었을 시, 가장 먼저 해야 되는 것.
-  // 이 사람이, 즐겨찾기에 추가된 사람인지?
-  // 예스 - 즐겨찾기 아이콘을 색칠을 지워줌, 즐겨찾기에서 사용자를 지워줌
-  // 노우 - 즐겨찾기 아이콘에 색깔을 칠함, 즐겨찾기에 사용자를 추가함
-
+function createUserUI(userInfo, onFavoriteHandler) {
+  const { avatar_url, login, is_favorite } = userInfo;
   const userUI = document.createRange().createContextualFragment(`
     <div class="user row">
       <img class="user__img" src="${avatar_url}" />
@@ -21,37 +13,36 @@ function createUserUI(userInfo) {
     </div>
   `);
 
-  const onFavoriteHandler = () => {
-    const userName = getUserName();
-    if (Favorite.doesExist(userName)) {
-      toggleFavorite();
-      Favorite.removeUser(userName);
-    } else {
-      toggleFavorite();
-      Favorite.addUser({ avatar_url, login, is_favorite });
-    }
-  };
+  // const onFavoriteHandler = () => {
+  //   const userName = getUserName();
+  //   if (Favorite.doesExist(userName)) {
+  //     toggleFavorite();
+  //     Favorite.removeUser(userName);
+  //   } else {
+  //     toggleFavorite();
+  //     Favorite.addUser({ avatar_url, login, is_favorite });
+  //   }
+  // };
 
-  const getUserName = () => {
-    return userElem.querySelector('.user__name').innerText;
-  };
+  // const getUserName = () => {
+  //   return userElem.querySelector('.user__name').innerText;
+  // };
 
-  const toggleFavorite = () => {
-    is_favorite = !is_favorite;
+  // const toggleFavorite = () => {
+  //   is_favorite = !is_favorite;
 
-    const favoriteIcon = userElem.querySelector('.star-icon');
-    favoriteIcon.classList.toggle('star-icon--active');
-  };
+  //   const favoriteIcon = userElem.querySelector('.star-icon');
+  //   favoriteIcon.classList.toggle('star-icon--active');
+  // };
 
-  const bindUserUiElement = () => {
-    userElem = userUI.querySelector('.user');
-  };
+  // const bindUserUiElement = () => {
+  //   userElem = userUI.querySelector('.user');
+  // };
 
   userUI //
     .querySelector('.user')
-    .addEventListener('click', onFavoriteHandler);
+    .addEventListener('click', () => onFavoriteHandler(userInfo));
 
-  bindUserUiElement();
   return userUI;
 }
 

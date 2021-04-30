@@ -1,17 +1,9 @@
 import createFragment from './createFragment';
-import createUserList from './userList';
+import createUserUI from './user';
 
-function addMain(currentSearchResult) {
+function addMain(currentSearchResult, onFavoriteHandler) {
   console.log({ currentSearchResult });
   const userListSection = document.querySelector('.userlist-section');
-
-  // const UI = createFragment(`
-  //   <main class="users">
-  //     <div class="users__row">
-  //       <span class="users__row-title">a</span>
-  //     </div>
-  //   </main>
-  // `);
 
   const users = document.createElement('main');
   users.className = 'users';
@@ -28,10 +20,8 @@ function addMain(currentSearchResult) {
 
   if (currentSearchResult !== null) {
     currentSearchResult.forEach((userInfo) => {
-      const UIs = createUserList(currentSearchResult);
-      UIs.forEach((userUI) => {
-        usersRow.appendChild(userUI);
-      });
+      const userUI = createUserUI(userInfo, onFavoriteHandler);
+      usersRow.appendChild(userUI);
     });
   }
 
