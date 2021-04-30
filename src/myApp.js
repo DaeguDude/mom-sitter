@@ -40,30 +40,84 @@ function App() {
       return setState({
         ...state,
         currentTab: 'local',
+        userSearchResults: null,
+        searchInput: '',
       });
     }
 
     return setState({
       ...state,
       currentTab: 'api',
+      searchInput: '',
+      userSearchResults: null,
     });
   }
 
   function onFavoriteHandler(userInfo) {
-    console.log('onFavoriteHandler');
-    // 이놈 Favorite에 있어?
+    const newSearchResult = state.userSearchResults.map((user) => {
+      return {
+        login: user.login,
+        avatar_url: user.avatar_url,
+        is_favorite: user.is_favorite,
+      };
+    });
 
-    console.log(userInfo);
+    const userFound = newSearchResult.find((user) => {
+      return user.login === userInfo.login;
+    });
+
+    // localStorage에 추가, 삭제
+    // searchResult에서 is_favorite 상태 변경
+    if (userFound.is_favorite) {
+      Favorites.removeUser(userFound.login);
+      userFound.is_favorite = !userFound.is_favorite;
+    } else {
+      userFound.is_favorite = !userFound.is_favorite;
+      Favorites.addUser(userFound);
+    }
+
+    // local시, 화면에서 지워주세요
+    if (state.currentTab === 'local') {
+      const indexToRemove = newSearchResult.findIndex((user) => {
+        return user.login === userFound.login;
+      });
+      console.log(indexToRemove);
+      newSearchResult.splice(indexToRemove, 1);
+    }
+
+    setState({
+      ...state,
+      userSearchResults: newSearchResult,
+      favorites: Favorites.getUserData(),
+    });
   }
 
   async function onSearchHandler(e) {
-    const userToSearch = state.searchInput;
-    const response = await getSearchResponse(userToSearch);
-    const newUserList = makeNewUserList(response, state.favorites);
-    setState({
-      ...state,
-      userSearchResults: newUserList,
-    });
+    if (state.currentTab === 'api') {
+      const userToSearch = state.searchInput;
+      const response = await getSearchResponse(userToSearch);
+      const newUserList = makeNewUserList(response, state.favorites);
+
+      return setState({
+        ...state,
+        userSearchResults: newUserList,
+      });
+    }
+
+    if (state.currentTab === 'local') {
+      const userToSearch = state.searchInput;
+      const newSearchList = state.favorites.filter((user) => {
+        const lowerUserToSearch = userToSearch.toLowerCase();
+        const lowerUserName = user.login.toLowerCase();
+        if (lowerUserName.includes(lowerUserToSearch)) {
+          return user;
+        }
+      });
+      return setState({
+        ...state,
+        userSearchResults: newSearchList,
+      });
+    }
   }
 
   function render() {
