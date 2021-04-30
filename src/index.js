@@ -3,10 +3,10 @@ import './styles/style.css';
 import createUserList from './userList';
 import Favorite from './Favorite';
 import mySearchTab from './searchTab';
-import state from './state';
-import { render } from './render';
 
-render();
+import myApp from './myApp';
+
+myApp.render();
 
 // const app = document.querySelector('.userlist-section');
 // app.addEventListener('click', async (event) => {
@@ -32,35 +32,35 @@ render();
 // header.appendChild(logCurrentStorageBtn);
 // header.appendChild(clearStorageBtn);
 
-// MAIN
-const searchBtn = document.querySelector('.userlist-section__search-btn');
-searchBtn.addEventListener('click', async () => {
-  resetUserListUI();
+// // MAIN
+// const searchBtn = document.querySelector('.userlist-section__search-btn');
+// searchBtn.addEventListener('click', async () => {
+//   resetUserListUI();
 
-  const usersToSearch = document.querySelector(
-    '.userlist-section__search-input'
-  ).value;
-  const userList = await getUser(usersToSearch);
-  const usersRow = document.querySelector('.users__row');
-  const userListUI = createUserList(userList);
-  userListUI.forEach((userUI) => {
-    usersRow.appendChild(userUI);
-  });
-});
+//   const usersToSearch = document.querySelector(
+//     '.userlist-section__search-input'
+//   ).value;
+//   const userList = await getUser(usersToSearch);
+//   const usersRow = document.querySelector('.users__row');
+//   const userListUI = createUserList(userList);
+//   userListUI.forEach((userUI) => {
+//     usersRow.appendChild(userUI);
+//   });
+// });
 
-function resetUserListUI() {
-  const usersRow = document.querySelector('.users__row');
-  while (usersRow.firstChild) {
-    usersRow.firstChild.remove();
-  }
-}
+// function resetUserListUI() {
+//   const usersRow = document.querySelector('.users__row');
+//   while (usersRow.firstChild) {
+//     usersRow.firstChild.remove();
+//   }
+// }
 
-// logUsersInFavorite
-function logUsersInFavorite() {
-  console.log(Favorite.getUserData());
-}
+// // logUsersInFavorite
+// function logUsersInFavorite() {
+//   console.log(Favorite.getUserData());
+// }
 
-function clearLocalStorage() {
-  localStorage.clear();
-  logUsersInFavorite();
-}
+// function clearLocalStorage() {
+//   localStorage.clear();
+//   logUsersInFavorite();
+// }

@@ -1,4 +1,4 @@
-import { createUserUI } from './user';
+import createUserUI from './user';
 
 // userList - array
 function createUserList(userList) {

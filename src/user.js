@@ -95,4 +95,4 @@ const starIconActive = `
     </svg>
   `;
 
-export { createUserUI };
+export default createUserUI;
