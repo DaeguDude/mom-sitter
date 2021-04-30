@@ -3,22 +3,22 @@ import './styles/style.css';
 import createUserList from './userList';
 import Favorite from './Favorite';
 import mySearchTab from './searchTab';
+import state from './state';
+import { render } from './render';
 
-console.log(mySearchTab);
-console.log(mySearchTab.getCurrentTab());
-mySearchTab.setTab('local');
+render();
 
 // DEVELOP
-const header = document.querySelector('.userlist-section__header');
-const logCurrentStorageBtn = document.createElement('button');
-logCurrentStorageBtn.innerText = 'log users in favorite';
-logCurrentStorageBtn.addEventListener('click', logUsersInFavorite);
+// const header = document.querySelector('.userlist-section__header');
+// const logCurrentStorageBtn = document.createElement('button');
+// logCurrentStorageBtn.innerText = 'log users in favorite';
+// logCurrentStorageBtn.addEventListener('click', logUsersInFavorite);
 
-const clearStorageBtn = document.createElement('button');
-clearStorageBtn.innerText = 'clear favorite storage';
-clearStorageBtn.addEventListener('click', clearLocalStorage);
-header.appendChild(logCurrentStorageBtn);
-header.appendChild(clearStorageBtn);
+// const clearStorageBtn = document.createElement('button');
+// clearStorageBtn.innerText = 'clear favorite storage';
+// clearStorageBtn.addEventListener('click', clearLocalStorage);
+// header.appendChild(logCurrentStorageBtn);
+// header.appendChild(clearStorageBtn);
 
 // MAIN
 const searchBtn = document.querySelector('.userlist-section__search-btn');
