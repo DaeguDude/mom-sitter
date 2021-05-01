@@ -2,6 +2,7 @@ import addHeader from './addHeader';
 import addNav from './addNav';
 import addMain from './addMain';
 import '../styles/style.css';
+import clearPage from './clearPage';
 
 const userInfo = {
   login: 'DaeguDude',
@@ -19,6 +20,7 @@ const userList = [userInfo, userInfo2];
 
 function App() {
   const render = () => {
+    clearPage();
     addHeader();
     addNav('api');
     addMain(userList);
