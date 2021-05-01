@@ -4,6 +4,7 @@ import addMain from './addMain';
 import '../styles/style.css';
 import clearPage from './clearPage';
 import Favorites from './Favorite';
+import getUserList from '../helpers/getUserList';
 
 function App() {
   let state = {
@@ -46,16 +47,49 @@ function App() {
     });
   }
 
+  async function onSearchHandler(e) {
+    const { currentTab, searchInput, favorites } = state;
+
+    if (state.currentTab === 'api') {
+      const userToSearch = searchInput;
+      const newUserList = await getUserList(userToSearch, favorites);
+
+      return setState({
+        ...state,
+        userSearchResults: newUserList,
+      });
+    }
+
+    if (currentTab === 'local') {
+      const userToSearch = searchInput;
+      const newSearchList = favorites.filter((user) => {
+        const lowerUserToSearch = userToSearch.toLowerCase();
+        const lowerUserName = user.login.toLowerCase();
+        if (lowerUserName.includes(lowerUserToSearch)) {
+          return user;
+        }
+      });
+
+      return setState({
+        ...state,
+        userSearchResults: newSearchList,
+      });
+    }
+  }
+
   const render = () => {
+    const { currentTab, searchInput, userSearchResults } = state;
+
     clearPage();
     addHeader();
     addNav(
-      state.currentTab,
+      currentTab,
       onTabChange,
-      state.searchInput,
-      onSearchChangeHandler
+      searchInput,
+      onSearchChangeHandler,
+      onSearchHandler
     );
-    addMain();
+    addMain(userSearchResults);
   };
 
   return { render };
