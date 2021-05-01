@@ -1,14 +1,11 @@
 import addHeader from './addHeader';
-import createSearchTab from './createSearchTab';
-import createSearchBar from './createSearchBar';
+import addNav from './addNav';
 import '../styles/style.css';
 
 function App() {
   const render = () => {
     addHeader();
-    const userListSection = document.querySelector('.userlist-section');
-    userListSection.appendChild(createSearchTab('api'));
-    userListSection.appendChild(createSearchBar());
+    addNav('api');
   };
 
   return { render };
