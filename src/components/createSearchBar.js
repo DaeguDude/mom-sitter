@@ -1,6 +1,6 @@
 import createFragment from '../helpers/cretateFragment';
 
-function createSearchBar() {
+function createSearchBar(searchInputValue, onSearchChangeHandler) {
   const UI = createFragment(`
     <div class="userlist-section__search-bar">
       <div class="container row row-between">
@@ -23,6 +23,12 @@ function createSearchBar() {
       </div>
     </div>
   `);
+
+  const searchInput = UI.querySelector('.userlist-section__search-input');
+  searchInput.value = searchInputValue;
+  searchInput.addEventListener('change', (e) => {
+    onSearchChangeHandler(e);
+  });
 
   return UI;
 }

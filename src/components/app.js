@@ -21,6 +21,13 @@ function App() {
     return render(state);
   }
 
+  function onSearchChangeHandler(e) {
+    setState({
+      ...state,
+      searchInput: e.target.value,
+    });
+  }
+
   function onTabChange(e) {
     if (e.target.classList.contains('tab-local')) {
       return setState({
@@ -42,7 +49,12 @@ function App() {
   const render = () => {
     clearPage();
     addHeader();
-    addNav(state.currentTab, onTabChange);
+    addNav(
+      state.currentTab,
+      onTabChange,
+      state.searchInput,
+      onSearchChangeHandler
+    );
     addMain();
   };
 
