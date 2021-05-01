@@ -47,7 +47,7 @@ function App() {
     });
   }
 
-  async function onSearchHandler(e) {
+  async function onSearchHandler() {
     const { currentTab, searchInput, favorites } = state;
 
     if (state.currentTab === 'api') {
@@ -77,6 +77,41 @@ function App() {
     }
   }
 
+  function onFavoriteHandler(userInfo) {
+    const newSearchResult = state.userSearchResults.map((user) => {
+      return {
+        login: user.login,
+        avatar_url: user.avatar_url,
+        is_favorite: user.is_favorite,
+      };
+    });
+
+    const userFound = newSearchResult.find((user) => {
+      return user.login === userInfo.login;
+    });
+
+    if (userFound.is_favorite) {
+      Favorites.removeUser(userFound.login);
+      userFound.is_favorite = !userFound.is_favorite;
+    } else {
+      userFound.is_favorite = !userFound.is_favorite;
+      Favorites.addUser(userFound);
+    }
+
+    if (state.currentTab === 'local') {
+      const indexToRemove = newSearchResult.findIndex((user) => {
+        return user.login === userFound.login;
+      });
+      newSearchResult.splice(indexToRemove, 1);
+    }
+
+    setState({
+      ...state,
+      userSearchResults: newSearchResult,
+      favorites: Favorites.getUserData(),
+    });
+  }
+
   const render = () => {
     const { currentTab, searchInput, userSearchResults } = state;
 
@@ -89,7 +124,7 @@ function App() {
       onSearchChangeHandler,
       onSearchHandler
     );
-    addMain(userSearchResults);
+    addMain(userSearchResults, onFavoriteHandler);
   };
 
   return { render };

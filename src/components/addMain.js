@@ -1,6 +1,6 @@
 import createUser from './createUser';
 
-function addMain(currentSearchResult) {
+function addMain(currentSearchResult, onFavoriteHandler) {
   const userListSection = document.querySelector('.userlist-section');
 
   const users = document.createElement('main');
@@ -18,7 +18,7 @@ function addMain(currentSearchResult) {
 
   if (currentSearchResult !== null) {
     currentSearchResult.forEach((userInfo) => {
-      const userUI = createUser(userInfo);
+      const userUI = createUser(userInfo, onFavoriteHandler);
       usersRow.appendChild(userUI);
     });
   }

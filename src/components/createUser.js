@@ -1,4 +1,4 @@
-function createUser(userInfo) {
+function createUser(userInfo, onFavoriteHandler) {
   const { avatar_url, login, is_favorite } = userInfo;
   const userUI = document.createRange().createContextualFragment(`
     <div class="user row">
@@ -9,6 +9,10 @@ function createUser(userInfo) {
       </button>
     </div>
   `);
+
+  userUI //
+    .querySelector('.user')
+    .addEventListener('click', () => onFavoriteHandler(userInfo));
 
   return userUI;
 }
