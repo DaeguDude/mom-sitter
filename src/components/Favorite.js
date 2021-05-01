@@ -1,4 +1,5 @@
 import searchDummyData from '../searchDummyData';
+import sortUserByAlphabet from '../helpers/sortUserByAlphabet';
 
 function LocalStorage() {
   const getSearchDummyData = () => {
@@ -10,7 +11,8 @@ function LocalStorage() {
   };
 
   const getUserData = () => {
-    return JSON.parse(localStorage.getItem('users'));
+    const favoriteUsers = JSON.parse(localStorage.getItem('users'));
+    return sortUserByAlphabet(favoriteUsers);
   };
 
   const removeUser = (userName) => {

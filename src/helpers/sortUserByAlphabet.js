@@ -1,4 +1,4 @@
-function sortByLogin(userList) {
+function sortUserByAlphabet(userList) {
   const newUserList = [...userList];
   newUserList.sort((a, b) => {
     return a.login.localeCompare(b.login);
@@ -7,4 +7,4 @@ function sortByLogin(userList) {
   return newUserList;
 }
 
-export default sortByLogin;
+export default sortUserByAlphabet;

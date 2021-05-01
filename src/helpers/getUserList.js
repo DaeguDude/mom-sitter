@@ -1,5 +1,6 @@
 import { Octokit } from '@octokit/core';
 import config from '../../config';
+import sortUserByAlphabet from './sortUserByAlphabet';
 
 const octokit = new Octokit({
   auth: config.githubToken,
@@ -12,7 +13,9 @@ async function getUserList(name, favorites) {
     page: 1,
   });
 
-  return makeNewUserList(searchResponse, favorites);
+  const userList = makeNewUserList(searchResponse, favorites);
+
+  return sortUserByAlphabet(userList);
 }
 
 function makeNewUserList(response, favorites) {
