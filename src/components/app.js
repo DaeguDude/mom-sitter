@@ -13,10 +13,36 @@ function App() {
     userSearchResults: null,
   };
 
+  function setState(newState) {
+    state = {
+      ...newState,
+    };
+
+    return render(state);
+  }
+
+  function onTabChange(e) {
+    if (e.target.classList.contains('tab-local')) {
+      return setState({
+        ...state,
+        currentTab: 'local',
+        userSearchResults: null,
+        searchInput: '',
+      });
+    }
+
+    return setState({
+      ...state,
+      currentTab: 'api',
+      searchInput: '',
+      userSearchResults: null,
+    });
+  }
+
   const render = () => {
     clearPage();
     addHeader();
-    addNav('api');
+    addNav(state.currentTab, onTabChange);
     addMain();
   };
 

@@ -1,6 +1,6 @@
 import createFragment from '../helpers/cretateFragment';
 
-function createSearchTab(tab) {
+function createSearchTab(tab, onTabChange) {
   let UI;
 
   if (tab === 'api') {
@@ -24,6 +24,8 @@ function createSearchTab(tab) {
 
     UI = createFragment(localAPI);
   }
+  const searchTab = UI.querySelector('.userlist-section__search-tab');
+  searchTab.addEventListener('click', onTabChange);
 
   return UI;
 }
