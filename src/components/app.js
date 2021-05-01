@@ -1,6 +1,6 @@
 import addHeader from './addHeader';
 import addNav from './addNav';
-import createUser from './createUser';
+import addMain from './addMain';
 import '../styles/style.css';
 
 const userInfo = {
@@ -15,14 +15,13 @@ const userInfo2 = {
   is_favorite: false,
 };
 
+const userList = [userInfo, userInfo2];
+
 function App() {
   const render = () => {
     addHeader();
     addNav('api');
-
-    const userListSection = document.querySelector('.userlist-section');
-    userListSection.appendChild(createUser(userInfo));
-    userListSection.appendChild(createUser(userInfo2));
+    addMain(userList);
   };
 
   return { render };
