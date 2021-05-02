@@ -1,12 +1,14 @@
 function createUser(userInfo, onFavoriteHandler) {
   const { avatar_url, login, is_favorite } = userInfo;
   const userUI = document.createRange().createContextualFragment(`
-    <div class="user row">
-      <img class="user__img" src="${avatar_url}" />
-      <span class="user__name">${login}</span>
-      <button class="user__favorite">
-        ${is_favorite ? starIconActive : starIcon}
-      </button>
+    <div class="user">
+      <div class="container row">
+        <img class="user__img" src="${avatar_url}" />
+        <span class="user__name">${login}</span>
+        <button class="user__favorite">
+          ${is_favorite ? starIconActive : starIcon}
+        </button>
+      </div>
     </div>
   `);
 
