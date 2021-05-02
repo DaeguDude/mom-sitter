@@ -7,9 +7,9 @@ function createSearchBar(
 ) {
   const UI = createFragment(`
     <div class="userlist-section__search-bar">
-      <div class="container row row-between">
+      <form class="container row row-between">
         <input class="userlist-section__search-input" type=text"
-        placeholder="검색어를 입력하세요">
+        placeholder="검색어를 입력하세요" pattern="^[a-zA-Z0-9-]*$" required>
         <button class="userlist-section__search-btn">
           <svg class="userlist-section__search-icon"
             xmlns="http://www.w3.org/2000/svg"
@@ -24,7 +24,7 @@ function createSearchBar(
             />
           </svg>
         </button>
-      </div>
+      </form>
     </div>
   `);
 
@@ -36,6 +36,16 @@ function createSearchBar(
 
   const searchBtn = UI.querySelector('.userlist-section__search-btn');
   searchBtn.addEventListener('click', (e) => {
+    if (searchInput.validity.valueMissing) {
+      return searchInput.setCustomValidity('값을 입력하여 주세요.');
+    }
+
+    if (searchInput.validity.patternMismatch) {
+      return searchInput.setCustomValidity(
+        '깃허브 유저는 영문, 숫자, 하이픈(-) 조합으로 이루어져 있습니다.'
+      );
+    }
+
     onSearchHandler(e);
   });
 
