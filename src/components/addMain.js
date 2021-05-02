@@ -1,8 +1,12 @@
 import createUsersRow from './createUsersRow';
 
-let newCurrentSearchResult;
-let newOnFavoriteHandler;
-
+/**
+ * 검색된 사용자 리스트를 받아, 화면에 렌더링을 하여줌
+ *
+ * @param {Object} currentSearchResult - 검색된 사용자 리스트
+ * @param {function} onFavoriteHandler - 즐겨찾기를 추가 삭제 해주는 콜백 함수
+ * @returns {}
+ */
 function addMain(currentSearchResult, onFavoriteHandler) {
   const userListSection = document.querySelector('.userlist-section');
 
@@ -19,10 +23,6 @@ function addMain(currentSearchResult, onFavoriteHandler) {
       users.appendChild(usersRow);
     }
   }
-
-  // DEVELOPMENT
-  newCurrentSearchResult = currentSearchResult;
-  newOnFavoriteHandler = onFavoriteHandler;
 
   return userListSection.appendChild(users);
 }

@@ -1,5 +1,10 @@
 import createFragment from '../helpers/cretateFragment';
 
+/**
+ * Header 부분을 렌더링 하여줌
+ *
+ * @returns {}
+ */
 function addHeader() {
   const userListSection = document.querySelector('.userlist-section');
 

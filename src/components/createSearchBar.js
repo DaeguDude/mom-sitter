@@ -1,5 +1,13 @@
 import createFragment from '../helpers/cretateFragment';
 
+/**
+ * 사용자 리스트를 검색할 수 있는 Search Bar를 되돌려 줌
+ *
+ * @param {string} searchInputValue - 현재 검색할 유저 이름
+ * @param {function} onSearchChangeHandler - 현재 검색할 유저 이름을 관리해 주는 콜백 함수
+ * @param {function} onSearchHandler - 검색 버튼 클릭시 사용자 이름을 받아 사용자 리스트를 받아와주는 콜백 함수
+ * @returns
+ */
 function createSearchBar(
   searchInputValue,
   onSearchChangeHandler,

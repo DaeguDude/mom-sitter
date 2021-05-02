@@ -1,3 +1,14 @@
+/**
+ * 사용자 정보와 즐겨찾기에 추가 삭제 해주는 함수를 받아, 동적으로 documentFragment를
+ * 만들어 즐겨찾기를 핸들링 해주는 함수를 클릭 이벤트를 등록시켜 되돌려 준다
+ *
+ * @param {Object} userInfo - 유저 정보
+ * @param {string} userInfo.avatar_url - 유저 이미지 주소
+ * @param {string} userInfo.login - 유저 이름
+ * @param {boolean} userInfo.is_favorite - 유저 즐겨찾기 등록 여부
+ * @param {function} onFavoriteHandler - 즐겨찾기를 추가 삭제 해주는 콜백 함수
+ * @returns {documentFragment} - 사용자 정보를 담은 documentFragment
+ */
 function createUser(userInfo, onFavoriteHandler) {
   const { avatar_url, login, is_favorite } = userInfo;
   const userUI = document.createRange().createContextualFragment(`
