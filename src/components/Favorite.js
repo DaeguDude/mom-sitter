@@ -1,11 +1,6 @@
-import searchDummyData from '../searchDummyData';
 import sortUserByAlphabet from '../helpers/sortUserByAlphabet';
 
 function LocalStorage() {
-  const getSearchDummyData = () => {
-    return searchDummyData;
-  };
-
   const storeUserData = (userData) => {
     localStorage.setItem('users', JSON.stringify(userData));
   };
@@ -26,7 +21,6 @@ function LocalStorage() {
   };
 
   return {
-    getSearchDummyData,
     removeUser,
     addUser,
     getUserData,
