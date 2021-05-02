@@ -14,19 +14,25 @@ function App() {
     userSearchResults: null,
   };
 
-  function setState(newState) {
+  function setState(newState, shouldRender = true) {
     state = {
       ...newState,
     };
 
-    return render(state);
+    if (shouldRender) {
+      console.log(state);
+      return render(state);
+    }
   }
 
   function onSearchChangeHandler(e) {
-    setState({
-      ...state,
-      searchInput: e.target.value,
-    });
+    setState(
+      {
+        ...state,
+        searchInput: e.target.value,
+      },
+      false
+    );
   }
 
   function onTabChange(e) {
@@ -47,7 +53,8 @@ function App() {
     });
   }
 
-  async function onSearchHandler() {
+  async function onSearchHandler(e) {
+    e.preventDefault();
     const { currentTab, searchInput, favorites } = state;
 
     if (state.currentTab === 'api') {
@@ -131,5 +138,23 @@ function App() {
 }
 
 const myApp = App();
+
+// if (module.hot) {
+//   module.hot.accept('./addHeader.js', function () {
+//     const userlistSection = document.querySelector('.userlist-section');
+//     const oldHeader = document.querySelector('.userlist-section__header');
+//     const newHeader = addHeader();
+
+//     console.log('what');
+//     userlistSection.replaceChild(newHeader, oldHeader);
+//   });
+// }
+
+if (module.hot) {
+  module.hot.accept('./addNav.js', function () {
+    console.log('ADDNAV: changed');
+    console.log('------------------------');
+  });
+}
 
 export default myApp;
