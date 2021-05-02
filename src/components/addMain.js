@@ -1,4 +1,7 @@
-import createUser from './createUser';
+import createUsersRow from './createUsersRow';
+
+let newCurrentSearchResult;
+let newOnFavoriteHandler;
 
 function addMain(currentSearchResult, onFavoriteHandler) {
   const userListSection = document.querySelector('.userlist-section');
@@ -6,24 +9,39 @@ function addMain(currentSearchResult, onFavoriteHandler) {
   const users = document.createElement('main');
   users.className = 'users';
 
-  const usersRow = document.createElement('div');
-  usersRow.className = 'users__row';
-
-  const usersRowTitle = document.createElement('span');
-  usersRowTitle.className = 'users__row-title';
-  usersRowTitle.innerText = 'a';
-
-  users.appendChild(usersRow);
-  usersRow.appendChild(usersRowTitle);
-
   if (currentSearchResult !== null) {
-    currentSearchResult.forEach((userInfo) => {
-      const userUI = createUser(userInfo, onFavoriteHandler);
-      usersRow.appendChild(userUI);
-    });
+    const userGroups = groupByFirstLetter(currentSearchResult);
+    for (const firstLetter in userGroups) {
+      const usersRow = createUsersRow(
+        userGroups[firstLetter],
+        onFavoriteHandler
+      );
+      users.appendChild(usersRow);
+    }
   }
 
+  // DEVELOPMENT
+  newCurrentSearchResult = currentSearchResult;
+  newOnFavoriteHandler = onFavoriteHandler;
+
   return userListSection.appendChild(users);
+}
+
+if (module.hot) {
+  module.hot.accept('./createUser.js', function () {});
+}
+
+function groupByFirstLetter(objectArray) {
+  return objectArray.reduce((acc, obj) => {
+    // obj.name의 첫번째 글자가 키로 존재하는지 확인
+    const firstLetter = obj.login[0].toLowerCase();
+    if (!acc[firstLetter]) {
+      acc[firstLetter] = [];
+    }
+
+    acc[firstLetter].push(obj);
+    return acc;
+  }, {});
 }
 
 export default addMain;
