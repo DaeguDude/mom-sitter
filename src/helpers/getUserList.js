@@ -4,11 +4,10 @@ import sortUserByAlphabet from './sortUserByAlphabet';
 
 let serverURL;
 
-fetch('netlify/functions/api')
+fetch('my_functions/api')
   .then((response) => response.json())
   .then((json) => {
-    serverURL = json.api;
-    console.log(serverURL);
+    console.log(json);
   });
 
 const octokit = new Octokit({
