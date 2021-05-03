@@ -1,15 +1,15 @@
 # 깃허브 사용자 검색 App
 
-- [산출물에 대한 설명](#산출물에-대한-설명)
-- [데모](#데모)
-- [로컬에서 작동하기](#로컬에서-작동하기)
-- [문제 해결 과정](#산출물에-대한-설명)
-- [보완되어야 할 점](#보완되어야-할-점)
-- [느낀 점](#느낀-점)
-- [하고 싶은 말](#하고-싶은-말)
-  - [자기소개](#자기소개)
-  - [지원 동기](#지원-동기)
-  - [마치며](#마치며)
+- [산출물에 대한 설명](#-산출물에-대한-설명)
+- [데모](#-데모)
+- [로컬에서 작동하기](#-로컬에서-작동하기)
+- [문제 해결 과정](#-산출물에-대한-설명)
+- [보완되어야 할 점](#-보완되어야-할-점)
+- [느낀 점](#-느낀-점)
+- [하고 싶은 말](#-하고-싶은-말)
+  - [자기소개](#-자기소개)
+  - [지원 동기](#-지원-동기)
+  - [마치며](#-마치며)
 
 ### 📝 산출물에 대한 설명
 
@@ -21,6 +21,36 @@
 <!-- 데모 작성해서 올리기 -->
 
 ### 🖥 로컬에서 작동하는 법
+
+1. 가장 먼저 이 프로젝트를 클론해서 로컬 머신에 내려받습니다.
+2. `npm install`을 통하여, 필요한 pacakge를 설치하여 줍니다.
+3. root directory에 `config.js`라는 파일을 만들어줍니다. 여기에 깃허브 search API
+   토큰을 저장시켜 주어야 합니다. 토큰을 만드는 방법은 [Creating a personal access token](https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token)
+   에서 확인하여 주세요.
+
+그 다음 `config.js` 파일에 아래와 같이 작성하고 저장하여 줍니다. 여러분이 받은 토큰을 직접 넣어주어야 합니다.
+
+```javascript
+const config = {
+  githubToken: '<토큰을 입력하여 주세요>',
+};
+
+export default config;
+```
+
+4. `src/helpers/getUserList.js` 파일로 가서 아래의 주석처리된 코드들을 풉니다.
+
+```javascript
+import { Octokit } from '@octokit/core';
+// import config from '../../config';
+import sortUserByAlphabet from './sortUserByAlphabet';
+
+// const octokit = new Octokit({
+//   auth: config.githubToken,
+// });
+```
+
+5. 마지막으로 `npm start`를 통하여 프로그램을 실행시킵니다!
 
 ### 🧐 문제 해결 과정
 
