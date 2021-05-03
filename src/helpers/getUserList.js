@@ -2,14 +2,12 @@ import { Octokit } from '@octokit/core';
 // import config from '../../config';
 import sortUserByAlphabet from './sortUserByAlphabet';
 
-let serverURL;
-
-fetch('/.netlify/functions/api')
-  .then((response) => response.json())
-  .then((json) => {
-    console.log('getUserList: received...');
-    console.log(json);
-  });
+fetch('/.netlify/functions/api', {
+  method: 'POST',
+}).then((response) => {
+  console.log(response);
+  return response.json();
+});
 
 const octokit = new Octokit({
   // auth: config.githubToken,
