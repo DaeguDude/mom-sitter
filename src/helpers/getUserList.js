@@ -4,7 +4,7 @@ import sortUserByAlphabet from './sortUserByAlphabet';
 
 let serverURL;
 
-fetch('/my_functions/api')
+fetch('/.netlify/functions/api')
   .then((response) => response.json())
   .then((json) => {
     console.log('getUserList: received...');
