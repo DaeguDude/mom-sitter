@@ -1,9 +1,18 @@
 import { Octokit } from '@octokit/core';
-import config from '../../config';
+// import config from '../../config';
 import sortUserByAlphabet from './sortUserByAlphabet';
 
+let serverURL;
+
+fetch('.netlify/functions/api')
+  .then((response) => response.json())
+  .then((json) => {
+    serverURL = json.api;
+    console.log(serverURL);
+  });
+
 const octokit = new Octokit({
-  auth: config.githubToken,
+  // auth: config.githubToken,
 });
 
 /**

@@ -87,8 +87,10 @@ main
 }
 
 .users__row-title {
+  margin: 0 auto;
+  width: 90%;
   font-size: 1.5rem;
-  padding: 0.25em 0.75em;
+
   color: #0f0f0f;
 }
 
