@@ -4,11 +4,10 @@ import sortUserByAlphabet from './sortUserByAlphabet';
 
 let serverURL;
 
-fetch('/my_functions/api');
-console
-  .log('getUserList: starting it...')
+fetch('/my_functions/api')
   .then((response) => response.json())
   .then((json) => {
+    console.log('getUserList: received...');
     console.log(json);
   });
 
