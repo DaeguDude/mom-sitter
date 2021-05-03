@@ -4,7 +4,7 @@ import sortUserByAlphabet from './sortUserByAlphabet';
 
 let serverURL;
 
-fetch('.netlify/functions/api')
+fetch('netlify/functions/api')
   .then((response) => response.json())
   .then((json) => {
     serverURL = json.api;
