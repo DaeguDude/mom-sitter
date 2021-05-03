@@ -18,7 +18,9 @@
 
 ### 🎥 데모
 
-<!-- 데모 작성해서 올리기 -->
+<img src='github-demo.gif' alt='search API demo'>
+
+온라인에서 작동을 해보시려면, [여기](https://zealous-kepler-01667a.netlify.app/)를 눌러주세요!
 
 ### 🖥 로컬에서 작동하는 법
 
